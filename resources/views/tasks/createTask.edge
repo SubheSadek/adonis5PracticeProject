@@ -1,0 +1,90 @@
+@layout('index')
+
+@section('content')
+
+<div class="row"> 
+    <div class="col-md-8 offset-2">
+    <div class="card">
+      <h5 class="card-header text-center " style="background:none;">Create Task</h5>
+        <div class="card-body">
+            
+            @if (flashMessages.has('notification')) 
+              <div class="alert alert-success" role="alert" id="myDiv">
+                <button type="button" class="close" onclick="myFunction()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              {{ flashMessages.get('notification') }}
+              </div>
+            @endif
+            <script>
+                function myFunction() {
+                    document.getElementById("myDiv").style.display = "none";
+                }
+            </script>
+            <form action="/create-task" method="POST">
+               {{ csrfField() }}
+
+                <div class="form-group">
+                   <label for="exampleInputName1">Task name</label>
+                   
+                   <input type="text" name="taskName"
+                    class="form-control {{ flashMessages.get('errors.taskName') ? 'is-invalid' : '' }}"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Enter task name"
+                    value="{{ flashMessages.get('taskName') || '' }}">
+                    
+                    @if (flashMessages.has('errors.taskName'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.taskName') }}
+                    </small>
+                    @endif
+                   
+                </div>
+                  
+                  
+                <div class="form-group">
+                   <label for="exampleInputName1">Task Title</label>
+                   
+                   <input type="text" name="taskTitle"
+                    class="form-control {{ flashMessages.get('errors.taskTitle') ? 'is-invalid' : '' }}"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Enter task title"
+                    value="{{ flashMessages.get('taskTitle') || '' }}">
+                    
+                    @if (flashMessages.has('errors.taskTitle'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.taskTitle') }}
+                    </small>
+                    @endif
+                   
+                </div>
+                  
+                  
+                <div class="form-group">
+                   <label for="exampleInputName1">Task Description</label>
+                   
+                   <textarea type="text" name="taskDesc" rows="5"
+                    class="form-control {{ flashMessages.get('errors.taskDesc') ? 'is-invalid' : '' }}"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Enter task name"
+                    value="{{ flashMessages.get('taskDesc') || '' }}"></textarea>
+                    
+                    @if (flashMessages.has('errors.taskDesc'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.taskDesc') }}
+                    </small>
+                    @endif
+                   
+                </div>
+                  
+                  
+                <button type="submit" class="btn btn-primary" style="text-align:center !important;">Create Task</button>
+            </form>
+        </div>
+    </div>
+    </div> 
+</div>
+@endsection

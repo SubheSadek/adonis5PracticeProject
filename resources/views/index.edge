@@ -1,0 +1,39 @@
+@layout('layouts/app')
+
+@section('content')
+<div class="row"> 
+    <div class="col-md-8 offset-2">
+    <div class="card" style="display:-webkit-box;">
+      <a href="/create-task" class="btn btn-success btn-sm" style="margin-bottom:0;">+ Create Task</a>
+        <div class="card-body" style="padding-top:0;">
+            <h5 class="text-center" style="background:none;">All Task</h5>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Sl.</th>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Task Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 @each((item,index) in tasks)
+                  <tr>
+                    <th scope="row">{{index+1}}</th>
+                    <td>{{item.task_name}}</td>
+                    <td>{{item.task_title}}</td>
+                    <td>{{item.task_desc}}</td>
+                    <td>Edit,delete</td>
+                 </tr>  
+                 @endeach
+                  
+
+                </tbody>
+              </table>
+            
+        </div>
+    </div>
+    </div> 
+</div>
+@endsection

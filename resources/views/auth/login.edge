@@ -1,0 +1,77 @@
+@layout('index')
+
+@section('content')
+
+<div class="row"> 
+    <div class="col-md-8 offset-2">
+    <div class="card">
+      <h5 class="card-header text-center " style="background:none;">Register</h5>
+        <div class="card-body">
+            
+            {{--  @if (flashMessages.has('notification')) 
+              <div class="alert alert-danger" role="alert" id="myDiv">
+                <button type="button" class="close" onclick="myFunction()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              {{ flashMessages.get('notification') }}
+              </div>
+            @endif  --}}
+            <script>
+                function myFunction() {
+                    document.getElementById("myDiv").style.display = "none";
+                }
+            </script>
+            <form action="/login" method="POST">
+               {{ csrfField() }}
+
+                  
+                <div class="form-group">
+                   <label for="exampleInputName1">Email</label>
+                   
+                   <input type="text" name="email"
+                    class="form-control {{ flashMessages.get('errors.email') ? 'is-invalid' : '' }}"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Enter email"
+                    value="{{ flashMessages.get('email') || '' }}">
+                    
+                    @if (flashMessages.has('errors.email'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.email') }}
+                    </small>
+                    @endif
+                   
+                </div>
+                  
+                <div class="form-group">
+                   <label for="exampleInputName1">Password</label>
+                   
+                   <input type="password" name="password"
+                    class="form-control {{ flashMessages.get('errors.password') ? 'is-invalid' : '' }}"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Enter password"
+                    value="{{ flashMessages.get('password') || '' }}">
+                    
+                    @if (flashMessages.has('errors.password'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.password') }}
+                    </small>
+                    @endif
+                    @if (flashMessages.has('error'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('error') }}
+                    </small>
+                    @endif
+                   
+                </div>
+
+
+                  
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+    </div> 
+</div>
+@endsection

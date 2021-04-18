@@ -1,0 +1,93 @@
+@layout('index')
+
+@section('content')
+
+<div class="row"> 
+    <div class="col-md-8 offset-2">
+    <div class="card">
+      <h5 class="card-header text-center " style="background:none;">Register</h5>
+        <div class="card-body">
+            <form action="/register" method="POST">
+               {{ csrfField() }}
+               
+                <div class="form-group">
+                   <label for="exampleInputName1">Full Name</label>
+                   
+                   <input type="text" name="name"
+                    class="form-control {{ flashMessages.get('errors.name') ? 'is-invalid' : '' }}"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Enter name"
+                    value="{{ flashMessages.get('name') || '' }}">
+                    
+                    @if (flashMessages.has('errors.name'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.name') }}
+                    </small>
+                    @endif
+                   
+                </div>
+                  
+                <div class="form-group">
+                   <label for="exampleInputName1">Email</label>
+                   
+                   <input type="text" name="email"
+                    class="form-control {{ flashMessages.get('errors.email') ? 'is-invalid' : '' }}"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Enter email"
+                    value="{{ flashMessages.get('email') || '' }}">
+                    
+                    @if (flashMessages.has('errors.email'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.email') }}
+                    </small>
+                    @endif
+                   
+                </div>
+                  
+                <div class="form-group">
+                   <label for="exampleInputName1">Password</label>
+                   
+                   <input type="password" name="password"
+                    class="form-control {{ flashMessages.get('errors.password') ? 'is-invalid' : '' }}"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Enter password"
+                    value="{{ flashMessages.get('password') || '' }}">
+                    
+                    @if (flashMessages.has('errors.password'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.password') }}
+                    </small>
+                    @endif
+                   
+                </div>
+                  
+                <div class="form-group">
+                   <label for="exampleInputName1">Re-type Password</label>
+                   
+                   <input type="password" name="password_confirmation"
+                    class="form-control"
+                    id="exampleInputName1"
+                    aria-describedby="nameHelp"
+                    placeholder="Re-type Password"
+                    value="{{ flashMessages.get('password_confirmation') || '' }}">
+                    
+                    @if (flashMessages.has('errors.password_confirmation'))
+                    <small class="form-text text-danger" style="font-weight:bolder"> 
+                      {{ flashMessages.get('errors.password_confirmation') }}
+                    </small>
+                    @endif
+                   
+                </div>
+                  
+
+                  
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+    </div> 
+</div>
+@endsection
